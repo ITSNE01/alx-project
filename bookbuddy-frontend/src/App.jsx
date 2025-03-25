@@ -1,20 +1,21 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import BookList from "./pages/BookList";
 import Profile from "./pages/Profile";
-import Navbar from "./components/Navbar"; // Import Navbar
 
 function App() {
   return (
-    <div>
-      <Navbar />  {/* Add Navbar here */}
+    <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/books" element={<BookList />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="books" element={<BookList />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
       </Routes>
-    </div>
+    </Router>
   );
 }
 

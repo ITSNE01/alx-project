@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav style={styles.navbar}>
-      <h2 style={styles.logo}>📚 BookBuddy</h2>
-      <ul style={styles.navLinks}>
-        <li><Link to="/" style={styles.link}>Home</Link></li>
-        <li><Link to="/books" style={styles.link}>Books</Link></li>
-        <li><Link to="/profile" style={styles.link}>Profile</Link></li>
+    <nav className="bg-gray-900 text-white p-4 flex justify-between items-center">
+      <h2 className="text-2xl font-bold">📚 BookBuddy</h2>
+      <ul className="flex space-x-6">
+        <li><Link to="/" className="hover:text-yellow-400">Home</Link></li>
+        <li><Link to="/books" className="hover:text-yellow-400">Books</Link></li>
+        <li><Link to="/profile" className="hover:text-yellow-400">Profile</Link></li>
       </ul>
     </nav>
   );
