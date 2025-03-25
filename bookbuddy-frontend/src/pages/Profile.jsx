@@ -1,12 +1,7 @@
-import React from "react";
-
-function Profile() {
+export default function Profile() {
   return (
-    <div>
-      <h1>Your Profile ��</h1>
-      <p>Manage your personal details and favorite books here.</p>
+    <div className="p-6 text-center">
+      <h1 className="text-2xl font-semibold text-gray-800">Your Profile</h1>
     </div>
   );
 }
-
-export default Profile;

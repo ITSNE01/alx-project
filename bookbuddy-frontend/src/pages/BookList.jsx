@@ -1,49 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllBooks } from "../api/bookAPI";
 
-const BookList = () => {
-  // Later we'll fetch this from an API
-  const books = [
-    {
-      id: 1,
-      title: "Atomic Habits",
-      author: "James Clear",
-      cover: "https://covers.openlibrary.org/b/id/10592366-L.jpg",
-    },
-    {
-      id: 2,
-      title: "The Alchemist",
-      author: "Paulo Coelho",
-      cover: "https://covers.openlibrary.org/b/id/8379786-L.jpg",
-    },
-    {
-      id: 3,
-      title: "To Kill a Mockingbird",
-      author: "Harper Lee",
-      cover: "https://covers.openlibrary.org/b/id/8226096-L.jpg",
-    },
-  ];
+export default function BookList() {
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const data = await getAllBooks();
+        setBooks(data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
+  if (loading) {
+    return <div className="p-6 text-center">Loading books...</div>;
+  }
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">📚 Book List</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {books.map((book) => (
-          <div
-            key={book.id}
-            className="bg-white p-4 rounded shadow hover:shadow-lg transition-all"
-          >
-            <img
-              src={book.cover}
-              alt={book.title}
-              className="w-full h-64 object-cover rounded"
-            />
-            <h2 className="text-xl font-semibold mt-4">{book.title}</h2>
-            <p className="text-gray-600">by {book.author}</p>
-          </div>
-        ))}
-      </div>
+      <h2 className="text-2xl font-bold mb-4 text-center">📚 All Books</h2>
+      {books.length === 0 ? (
+        <p className="text-center text-gray-500">No books available.</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {books.map((book) => (
+            <div
+              key={book._id}
+              className="bg-white shadow-md rounded p-4 hover:shadow-lg transition"
+            >
+              <img
+                src={book.coverImage || "https://via.placeholder.com/150"}
+                alt={book.title}
+                className="w-full h-64 object-cover rounded"
+              />
+              <h3 className="text-lg font-semibold mt-2">{book.title}</h3>
+              <p className="text-sm text-gray-600">by {book.author}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
-};
-
-export default BookList;
+}
