@@ -6,6 +6,7 @@ export default function Navbar() {
       <Link to="/" className="text-blue-500 hover:underline font-semibold">Home</Link>
       <Link to="/books" className="text-blue-500 hover:underline font-semibold">Books</Link>
       <Link to="/profile" className="text-blue-500 hover:underline font-semibold">Profile</Link>
+      <Link to="/add" className="text-blue-500 hover:underline font-semibold">Add Book</Link>
     </nav>
   );
 }

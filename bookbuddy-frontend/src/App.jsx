@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import BookList from "./pages/BookList";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
+import AddBook from "./pages/AddBook";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<BookList />} />
         <Route path="/profile" element={<Profile />} />
+	<Route path="/add" element={<AddBook />} />
       </Routes>
     </Router>
   );
